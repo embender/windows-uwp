@@ -18,6 +18,7 @@ When working with the Visual layer, a CompositionBrush must be used to paint the
 -   [Paint with CompositionBrush](./composition-brushes.md#paint-with-a-compositionbrush)
 	-   [Paint with a solid color](./composition-brushes.md#paint-with-a-solid-color)
 	-   [Paint with a linear gradient](./composition-brushes.md#paint-with-a-linear-gradient)
+	-   [Paint with a radial gradient](./composition-brushes.md#paint-with-a-radial-gradient)
 	-   [Paint with an image](./composition-brushes.md#paint-with-an-image)
 	-   [Paint with a custom drawing](./composition-brushes.md#paint-with-a-custom-drawing)
 	-   [Paint with a video](./composition-brushes.md#paint-with-a-video)
@@ -44,6 +45,7 @@ A [CompositionBrush](https://docs.microsoft.com/uwp/api/Windows.UI.Composition.C
 |[CompositionMaskBrush](https://docs.microsoft.com/uwp/api/Windows.UI.Composition.CompositionMaskBrush)          |Paints a visual with a CompositionBrush with an opacity mask |Windows 10 Anniversary Update (SDK 14393)
 |[CompositionNineGridBrush](https://docs.microsoft.com/uwp/api/Windows.UI.Composition.CompositionNineGridBrush)      |Paints an area with a CompositionBrush using a NineGrid stretch |Windows 10 Anniversary Update SDK (14393)
 |[CompositionLinearGradientBrush](https://docs.microsoft.com/uwp/api/windows.ui.composition.compositionlineargradientbrush)|Paints an area with a linear gradient                    |Windows 10 Fall Creators Update (Insider Preview SDK)
+|[CompositionRadialGradientBrush](https://docs.microsoft.com/uwp/api/windows.ui.composition.compositionradialgradientbrush)|Paints an area with a radial gradient                    |(unsure as to what the public name is)
 |[CompositionBackdropBrush](https://docs.microsoft.com/uwp/api/Windows.UI.Composition.CompositionBackdropBrush)     |Paints an area by sampling background pixels from either the application or pixels directly behind the application's window on desktop. Used as an input to another CompositionBrush like a CompositionEffectBrush | Windows 10 Anniversary Update (SDK 14393)
 
 ### Paint with a solid color
@@ -99,6 +101,28 @@ _redyellowBrush.ColorStops.Add(_compositor.CreateColorGradientStop(1, Colors.Yel
 _gradientVisual = _compositor.CreateSpriteVisual();
 _gradientVisual.Brush = _redyellowBrush;
 _gradientVisual.Size = new Vector2(156, 156);
+```
+### Paint with a radial gradient
+
+A [CompositionRadialGradientBrush] paints an area with a linear gradient. A radial gradient blends two or more colors with the gradient starting from the center of the ellipse and ending at the ellipse's radius. GradientStop objects are used to define the colors and their location in the gradient.
+
+The following illustration and code shows a SpriteVisual painted with a RadialGradientBrush with 2 GradientStops.
+
+![CompositionRadialGradientBrush](insert radial gradient png here)
+
+```cs
+Compositor _compositor;
+SpriteVisual _gradientVisual;
+CompositionRadialGradientBrush RGBrush;
+
+_compositor = Window.Current.Compositor;
+
+RGBrush = _compositor.CreateRadialGradientBrush();
+RGBrush.ColorStops.Add(_compositor.CreateColorGradientStop(0, Colors.Aquamarine));
+RGBrush.ColorStops.Add(_compositor.CreateColorGradientStop(1, Colors.DeepPink));
+_gradientVisual = _compositor.CreateSpriteVisual();
+_gradientVisual.Brush = RGBrush;
+_gradientVisual.Size = new Vector2(200, 200);
 ```
 
 ### Paint with an image
